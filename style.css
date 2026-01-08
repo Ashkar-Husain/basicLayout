@@ -37,11 +37,13 @@ nav .left {
   padding-left: 10%;
 } */
 
- header .left p{ 
+header .left p {
   font-size: 12px;
- }
+  position: relative;
+  /* bottom: 9px; */
+}
 
-header .right img{
+header .right img {
   width: 100%;
   height: 90px;
 }
@@ -50,21 +52,28 @@ header .left h2 {
   font-family: Georgia;
   font-weight: 100;
   text-transform: uppercase;
+  font-size: 24px;
+  position: relative;
+  top: 13px;
 }
 
 header .left span {
   color: #f05858;
-  border-radius: 10 px;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 10px;
   /* cursor: pointer; */
-  font-size: 25px;
+  font-size: 21px;
   margin-right: 20px;
 }
 
 nav .left {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 10px;
+}
+
+nav .left h5{
+  font-size: 18px;
 }
 
 /* header .right {
@@ -83,7 +92,7 @@ header {
   border-bottom: 1px solid #fff;
 }
 
-.header-search input{
+.header-search input {
   width: 800px;
   height: 42px;
   border-radius: 6px;
@@ -98,7 +107,7 @@ nav ul {
   gap: 20px;
 }
 
-nav ul li{
+nav ul li {
   background-color: rgb(25, 24, 24);
   padding: 8px 16px;
   border-radius: 6px;
@@ -108,41 +117,54 @@ nav ul li{
   cursor: pointer;
 }
 
-nav ul li:hover{
+nav ul li:hover {
   scale: 1.1;
 }
 
-nav ul .active{
-  background-color: #f05858
+nav ul .active {
+  background-color: #f05858;
 }
 
-nav .profile{
+nav .profile {
   position: absolute;
   top: 220px;
   width: 320px;
   background-color: #000;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   border-radius: 8px;
+
+  
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition: opacity 0.55s ease, transform 0.55s ease, visibility 0.55s ease;
 }
 
-nav .profile ul{
+nav .profile.close {
+  opacity: 0;
+  transform: translateY(-300px);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+nav .profile ul {
   display: flex;
   flex-direction: column;
-  
+  padding: 0;
 }
 
-nav .profile ul li{
+nav .profile ul li {
   padding: 15px 20px;
 }
 
-nav .profile ul b{
+nav .profile ul b {
   background-color: #f05858;
   padding: 4px;
   border-radius: 6px;
   margin-right: 15px;
 }
 
-nav .right span{
+nav .right span {
   float: right;
 }
 /* Main */
@@ -217,30 +239,31 @@ aside::-webkit-scrollbar-thumb:hover {
 nav span {
   background-color: #f05858;
   border-radius: 8px;
-  padding: 12px;
+  padding: 10px;
   cursor: pointer;
 }
-
-
 
 /* Accordion */
 .accordion {
   background-color: rgb(25, 25, 25);
   margin-bottom: 20px;
-  padding: 15px;
+  padding: 18px 15px 6px;
   border-radius: 8px;
 }
 
-.accordion.close p{
-   display: none;
+.accordion.close p {
+  display: none;
 }
 
 .accordion p {
   margin-top: 15px;
 }
 
+.accordion h4 {
+  font-size: 20px;
+}
 
-.accordion h4 small{
+.accordion h4 small {
   float: right;
   background-color: #000;
   padding: 10px;
@@ -251,7 +274,7 @@ nav span {
   bottom: 10px;
 }
 
-.accordion h4 small:hover{
+.accordion h4 small:hover {
   background-color: #f05858;
 }
 
@@ -259,7 +282,6 @@ nav span {
   background-color: #fff;
   color: #000;
 }
-
 
 /* Footer */
 footer {
@@ -280,20 +302,20 @@ hr {
   border-radius: 8px;
 }
 
-.sidebar-img{ 
-  margin-top: 80px; 
+.sidebar-img {
+  margin-top: 80px;
 }
 
-.sidebar-img img{
-  width: 100%;  
+.sidebar-img img {
+  width: 100%;
 }
 
-.sidebar-img.open{ 
-  margin-top: 250px; 
+.sidebar-img.open {
+  margin-top: 250px;
 }
 
-.sidebar-img.open img{
-  width: 179%;  
+.sidebar-img.open img {
+  width: 179%;
 }
 
 /* Sidebar Open/Close */
@@ -308,20 +330,17 @@ aside.open {
   transition: width 0.35s ease-in-out;
 }
 
-
 /* Highlight Text */
 .highlight {
-    background-color: #f05858;
-    color: #fff;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-weight: bold;
+  background-color: #f05858;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
 /* Optional: Add some styling to make the highlight stand out */
 .highlight:hover {
-    background-color: #e04545;
-    transition: background-color 0.2s ease;
+  background-color: #e04545;
+  transition: background-color 0.2s ease;
 }
-
-

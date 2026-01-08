@@ -7,10 +7,13 @@
     <title>Basic Layout</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <div class="container">
+    <div class="website-container">
         <header>
             <div class="left">
                 <h2>Ashkar Coding</h2>
@@ -41,10 +44,10 @@
                 </ul>
             </div>
             <div class="right">
-                <span>You <i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <div class="profile">
+                <span onclick="toggleDropdown()">You <i class="fa fa-chevron-up" aria-hidden="true"></i></span>
+                <div class="profile close">
                     <ul>
-                       
+
                         <li><b><i class="fa fa-plus-square-o" aria-hidden="true"></i>
                             </b>Post</li>
                         <li><b><i class="fa fa-cog" aria-hidden="true"></i></b> Settings
@@ -73,21 +76,22 @@
                         <h4>Dashboard</h4>
                     </div>
 
-                    <div class="queries">
+                    <div onclick="" class="queries">
                         <span><i class="fa fa-quora" aria-hidden="true"></i>
                         </span>
                         <h4>Queries</h4>
                     </div>
                     <div class="accordions">
                         <div class="accordion">
-                            <h4>Who is Ashkar Husain ? <small onclick="toggleAccordions()"><i
+                            <h4>Who is Ashkar Husain ? <small onclick="toggleAccordions(this)"><i
                                         class="fa fa-minus"></i></small></h4>
                             <p>Ashkr Husain is a web developer at clara softtech.</p>
                         </div>
 
                         <div class="accordion">
-                            <h4>Who is Ashkar Husain ?</h4>
-                            <p>Ashkr Husain is a web developer at clara softtech.</p>
+                            <h4>Who is Kamyab Husain ? <small onclick="toggleAccordions(this)"><i
+                                        class="fa fa-minus"></i></small></h4>
+                            <p>Kamyab Husain is a app developer at clara softtech.</p>
                         </div>
                     </div>
 
@@ -123,6 +127,9 @@
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 
