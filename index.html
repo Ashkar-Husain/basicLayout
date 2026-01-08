@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Layout</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="left">
+                <h2>Ashkar Coding</h2>
+                <p>The place where we fulfill our dreams</p>
+            </div>
+
+            <div class="middle">
+                <div class="header-search"><input type="search" oninput="highlightWords(this.value)"
+                        placeholder="Search"></div>
+            </div>
+            <!-- Logo -->
+            <div class="right">
+                <img src="/ashkar_coding_new.png" alt="">
+            </div>
+        </header>
+        <nav>
+            <div class="left">
+                <span id="hamburger" onclick="toggleSidebar()"><i class="fa fa-bars" aria-hidden="true"></i>
+                </span>
+                <h5>Hey There! I'm Using Website</h5>
+            </div>
+            <div class="middle">
+                <ul id="navLi">
+                    <li class="active">Home</li>
+                    <li>About</li>
+                    <li>Games</li>
+                    <!-- <li>Settings</li> -->
+                </ul>
+            </div>
+            <div class="right">
+                <span>You <i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                <div class="profile">
+                    <ul>
+                       
+                        <li><b><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                            </b>Post</li>
+                        <li><b><i class="fa fa-cog" aria-hidden="true"></i></b> Settings
+                        </li>
+                        <li><b><i class="fa fa-sign-in" aria-hidden="true"></i>
+                            </b> Login</li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+        <main>
+            <div class="sidebar">
+                <aside>
+
+                    <div class="aside-search">
+                        <span><i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                        <h4><input type="search" placeholder="Search"></h4>
+                    </div>
+
+                    <div class="dashboard">
+                        <span><i class="fa fa-tachometer" aria-hidden="true"></i>
+                        </span>
+                        <h4>Dashboard</h4>
+                    </div>
+
+                    <div class="queries">
+                        <span><i class="fa fa-quora" aria-hidden="true"></i>
+                        </span>
+                        <h4>Queries</h4>
+                    </div>
+                    <div class="accordions">
+                        <div class="accordion">
+                            <h4>Who is Ashkar Husain ? <small onclick="toggleAccordions()"><i
+                                        class="fa fa-minus"></i></small></h4>
+                            <p>Ashkr Husain is a web developer at clara softtech.</p>
+                        </div>
+
+                        <div class="accordion">
+                            <h4>Who is Ashkar Husain ?</h4>
+                            <p>Ashkr Husain is a web developer at clara softtech.</p>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="logout">
+                        <span><i class="fa fa-sign-out" aria-hidden="true"></i>
+                        </span>
+                        <h4>Logout</h4>
+                    </div>
+
+                    <div class="mode">
+                        <Span><i class="fa fa-moon-o" aria-hidden="true"></i>
+                        </Span>
+                        <h4>Dark Mode</h4>
+                        <!-- <Span><i class="fa fa-lightbulb-o" aria-hidden="true"></i> -->
+                        </Span>
+                    </div>
+
+                    <div class="sidebar-img">
+                        <img src="./sidebar_logo.png" alt="">
+                    </div>
+                </aside>
+            </div>
+            <div class="content">
+
+            </div>
+        </main>
+        <footer>
+            &copy; All rights reserved by Ashkar Husain
+            <span>
+                <script>document.write((new Date).getFullYear())</script>
+            </span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
