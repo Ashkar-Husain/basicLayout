@@ -344,3 +344,24 @@ aside.open {
   background-color: #e04545;
   transition: background-color 0.2s ease;
 }
+
+
+/* Bootstap Modal */
+.modal-content{
+  background-color: #000 !important;
+  color: #fff !important;
+  width: 1450px !important;
+  top: 190px !important;
+  right: 300px;
+}
+
+.btn{
+  background-color: #f05858 !important;
+  outline: none !important;
+  border: none !important;
+  text-transform: uppercase !important;
+}
+
+.error{
+  color: #f05858;
+}
