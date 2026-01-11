@@ -44,7 +44,7 @@
                 </ul>
             </div>
             <div class="right">
-                <span onclick="toggleDropdown()">You <i class="fa fa-chevron-up" aria-hidden="true"></i></span>
+                <span onclick="toggleDropdown()" id="userName"></span>
                 <div class="profile close">
                     <ul id="dropDownList">
 
@@ -66,7 +66,7 @@
                     <div class="aside-search">
                         <span><i class="fa fa-search" aria-hidden="true"></i>
                         </span>
-                        <h4><input type="search" placeholder="Search"></h4>
+                        <h4><input type="search" id="searchQuery"  placeholder="Search"></h4>
                     </div>
 
                     <div class="dashboard">
@@ -81,21 +81,11 @@
                         <h4>Queries</h4>
                     </div>
                     <div class="accordions">
-                        <!-- <div class="accordion">
-                            <h4>Who is Ashkar Husain ? <small onclick="toggleAccordions(this)"><i
-                                        class="fa fa-minus"></i></small></h4>
-                            <p>Ashkr Husain is a web developer at clara softtech.</p>
-                        </div>
-
-                        <div class="accordion">
-                            <h4>Who is Kamyab Husain ? <small onclick="toggleAccordions(this)"><i
-                                        class="fa fa-minus"></i></small></h4>
-                            <p>Kamyab Husain is a app developer at clara softtech.</p>
-                        </div> -->
+                       
                     </div>
 
                     <hr>
-                    <div class="logout">
+                    <div onclick="logoutYourself()" class="logout">
                         <span><i class="fa fa-sign-out" aria-hidden="true"></i>
                         </span>
                         <h4>Logout</h4>
@@ -176,7 +166,7 @@
                         <div class="col-sm-12 mb-3">
                             <label class="mb-2" for="user_mobile">User Mobile<span class="error">*</span></label>
                             <input type="text" id="user_mobile" class="form-control">
-                             <div id="user_mobile_error" class="error"></div>
+                            <div id="user_mobile_error" class="error"></div>
                         </div>
 
 
@@ -193,7 +183,8 @@
                         </div>
 
                         <div class="col-sm-12 mb-3">
-                            <label class="mb-2" for="confirm_password">Confirm Password<span class="error">*</span></label>
+                            <label class="mb-2" for="confirm_password">Confirm Password<span
+                                    class="error">*</span></label>
                             <input type="password" minlength="3" id="confirm_password" class="form-control">
                             <div id="confirm_password_error" class="error"></div>
                         </div>
@@ -204,6 +195,40 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" onclick="signupYourself()" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="loginModalLabel">Login</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-sm-12 mb-3">
+                            <label class="mb-2" for="login_email">User Email<span class="error">*</span></label>
+                            <input type="text" id="login_email" class="form-control">
+                            <div id="login_email_error" class="error"></div>
+                        </div>
+
+                        <div class="col-sm-12 mb-3">
+                            <label class="mb-2" for="login_password">Password<span class="error">*</span></label>
+                            <input type="password" minlength="3" id="login_password" class="form-control">
+                            <div id="login_password_error" class="error"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="loginYourself()" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </div>

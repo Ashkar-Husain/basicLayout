@@ -72,7 +72,7 @@ nav .left {
   gap: 10px;
 }
 
-nav .left h5{
+nav .left h5 {
   font-size: 18px;
 }
 
@@ -133,7 +133,6 @@ nav .profile {
   padding: 20px 20px 10px 20px;
   border-radius: 8px;
 
-  
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
@@ -332,22 +331,12 @@ aside.open {
 
 /* Highlight Text */
 .highlight {
-  background-color: #f05858;
-  color: #fff;
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-weight: bold;
-}
-
-/* Optional: Add some styling to make the highlight stand out */
-.highlight:hover {
-  background-color: #e04545;
-  transition: background-color 0.2s ease;
+  color: #f05858;  
 }
 
 
 /* Bootstap Modal */
-.modal-content{
+.modal-content {
   background-color: #000 !important;
   color: #fff !important;
   width: 1450px !important;
@@ -355,13 +344,13 @@ aside.open {
   right: 300px;
 }
 
-.btn{
+.btn {
   background-color: #f05858 !important;
   outline: none !important;
   border: none !important;
   text-transform: uppercase !important;
 }
 
-.error{
+.error {
   color: #f05858;
 }

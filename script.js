@@ -31,6 +31,12 @@ function toggleAccordions(el) {
 //* Active/Inactive Navigation
 function getActiveNavigation() {
   const nav = document.querySelector("#navLi");
+  const userName = document.querySelector("#userName");
+  const user = JSON.parse(sessionStorage.getItem("userSession"));
+
+  userName.innerHTML =
+    `${user !== null ? user.name : "You"}` +
+    ' <i class="fa fa-chevron-up" aria-hidden="true"></i>';
 
   nav.addEventListener("click", (e) => {
     const li = e.target.closest("li");
@@ -49,6 +55,8 @@ getActiveNavigation();
 function toggleDropdown() {
   const profile = document.querySelector(".profile");
   const dropDownList = document.querySelector("#dropDownList");
+  const user = JSON.parse(sessionStorage.getItem("userSession"));
+  console.log(user);
   profile.classList.toggle("close");
   if (profile.classList.contains("close")) {
     document
@@ -63,7 +71,10 @@ function toggleDropdown() {
   const oldAuthItem = dropDownList.querySelector(".auth-item");
   if (oldAuthItem) oldAuthItem.remove();
   const signup = JSON.parse(localStorage.getItem("signup")) || [];
-  if (signup.length > 0) {
+  if (user !== null) {
+    dropDownList.innerHTML += `<li onclick="logoutYourself()" class="auth-item"><b><i  class="fa fa-sign-in" aria-hidden="true"></i>
+                            </b> Logout</li>`;
+  } else if (signup.length > 0) {
     dropDownList.innerHTML += `<li data-bs-target="#loginModal" class="auth-item"  data-bs-toggle="modal"><b><i onclick="loginYourself()" class="fa fa-sign-in" aria-hidden="true"></i>
                             </b> Login</li>`;
   } else {
@@ -73,12 +84,13 @@ function toggleDropdown() {
 }
 
 //! Signup
+const signupModal = new bootstrap.Modal(document.getElementById("signupModal"));
 function signupYourself() {
   const signup = JSON.parse(localStorage.getItem("signup")) || [];
 
   const mobileInput = document.querySelector("#user_mobile");
   const emailInput = document.querySelector("#user_email");
-  const passwordInput = document.querySelector("#password");
+  const passwordInput = document.querySelector("#user_password");
   const confirmPasswordInput = document.querySelector("#confirm_password");
   const nameInput = document.querySelector("#user_name");
 
@@ -114,11 +126,11 @@ function signupYourself() {
   }
 
   if (!password) {
-    document.querySelector("#password_error").innerHTML =
+    document.querySelector("#user_password_error").innerHTML =
       "This field is required!";
     error++;
   } else {
-    document.querySelector("#password_error").innerHTML = "";
+    document.querySelector("#user_password_error").innerHTML = "";
   }
 
   if (!confirmPassword) {
@@ -158,12 +170,12 @@ function signupYourself() {
     return;
   }
 
-  //* Check if mobile already exists
-  const isExists = signup.some((user) => user.mobile === mobile);
+  //* Check if mail address already exists
+  const isExists = signup.some((user) => user.email === email);
   if (isExists) {
     Swal.fire(
       "Already Registered",
-      "This mobile number already exists",
+      "This email address already exists!",
       "info"
     );
     return;
@@ -173,8 +185,10 @@ function signupYourself() {
   const sign = {
     id: Date.now(),
     name: name,
+    email: email,
     mobile: mobile,
     password: password,
+    confirm_password: confirmPassword,
   };
 
   signup.push(sign);
@@ -187,8 +201,76 @@ function signupYourself() {
     draggable: true,
   });
 
+  nameInput.value = "";
   mobileInput.value = "";
+  emailInput.value = "";
   passwordInput.value = "";
+  confirmPasswordInput.value = "";
+  signupModal.hide();
+  toggleDropdown();
+}
+
+//! Login
+function loginYourself() {
+  const email = document.querySelector("#login_email").value.trim();
+  const password = document.querySelector("#login_password").value.trim();
+
+  let error = 0;
+
+  // Email validation
+  if (!email) {
+    document.querySelector("#login_email_error").innerHTML =
+      "This is a required field";
+    error++;
+  } else {
+    document.querySelector("#login_email_error").innerHTML = "";
+  }
+
+  // Password validation
+  if (!password) {
+    document.querySelector("#login_password_error").innerHTML =
+      "This is a required field";
+    error++;
+  } else {
+    document.querySelector("#login_password_error").innerHTML = "";
+  }
+
+  if (error !== 0) return;
+
+  // Get signup data
+  const signup = JSON.parse(localStorage.getItem("signup")) || [];
+
+  // Find matching user
+  const user = signup.find((u) => u.email === email && u.password === password);
+
+  if (!user) {
+    Swal.fire("Login Failed", "Invalid email or password", "error");
+    return;
+  }
+
+  // Save session data (without password)
+  const sessionUser = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    mobile: user.mobile,
+  };
+
+  sessionStorage.setItem("userSession", JSON.stringify(sessionUser));
+
+  Swal.fire("Success", "Login successful", "success").then(() => {
+    // redirect to dashboard
+    window.location.reload();
+  });
+}
+
+//! Logout
+function logoutYourself() {
+  sessionStorage.removeItem("userSession");
+
+  Swal.fire("Logged Out", "You have been logged out", "success").then(() => {
+    window.location.href = "login.html";
+  });
 }
 
 const queriesModal = new bootstrap.Modal(
@@ -237,32 +319,82 @@ function addNewQuery() {
 }
 
 //! Show Queries
-function showQueries() {
+// function showQueries() {
+//   const queries = JSON.parse(localStorage.getItem("queries")) || [];
+//   const accordions = document.querySelector(".accordions");
+
+//   let accordion = "";
+
+//   if (queries.length === 0) {
+//     // accordion = `<p>No Queries Found!</p>`;
+//   } else {
+//     queries.forEach((q) => {
+//       accordion += `
+//         <div class="accordion">
+//           <h4>
+//             ${q.question}
+//             <small onclick="toggleAccordions(this)">
+//               <i class="fa fa-minus"></i>
+//             </small>
+//           </h4>
+//           <p>${q.answer}</p>
+//         </div>
+//       `;
+//     });
+//   }
+
+//   accordions.innerHTML = accordion;
+// }
+
+function showQueries(searchText = "") {
   const queries = JSON.parse(localStorage.getItem("queries")) || [];
   const accordions = document.querySelector(".accordions");
 
-  let accordion = "";
+  let filtered = [...queries];
 
-  if (queries.length === 0) {
-    // accordion = `<p>No Queries Found!</p>`;
-  } else {
-    queries.forEach((q) => {
-      accordion += `
-        <div class="accordion">
-          <h4>
-            ${q.question}
-            <small onclick="toggleAccordions(this)">
-              <i class="fa fa-minus"></i>
-            </small>
-          </h4>
-          <p>${q.answer}</p>
-        </div>
-      `;
+  if (searchText.trim() !== "") {
+    filtered.sort((a, b) => {
+      const aMatch =
+        a.question.toLowerCase().includes(searchText.toLowerCase()) ||
+        a.answer.toLowerCase().includes(searchText.toLowerCase());
+
+      const bMatch =
+        b.question.toLowerCase().includes(searchText.toLowerCase()) ||
+        b.answer.toLowerCase().includes(searchText.toLowerCase());
+
+      return bMatch - aMatch;
     });
   }
 
-  accordions.innerHTML = accordion;
+  let accordionHTML = "";
+
+  filtered.forEach((q) => {
+    accordionHTML += `
+      <div class="accordion">
+        <h4>
+          ${highlightText(q.question, searchText)}
+          <small onclick="toggleAccordions(this)">
+            <i class="fa fa-minus"></i>
+          </small>
+        </h4>
+        <p>${highlightText(q.answer, searchText)}</p>
+      </div>
+    `;
+  });
+
+  accordions.innerHTML = accordionHTML || `<p>No Queries Found!</p>`;
 }
+
+function highlightText(text, searchText) {
+  if (!searchText) return text;
+
+  const regex = new RegExp(`(${searchText})`, "gi");
+  return text.replace(regex, `<span class="highlight">$1</span>`);
+}
+
+document.querySelector("#searchQuery").addEventListener("input", function () {
+  showQueries(this.value);
+});
 
 showQueries();
 
